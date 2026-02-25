@@ -1,4 +1,5 @@
 "use client"
+import "@/i18next";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { useState } from 'react'
 

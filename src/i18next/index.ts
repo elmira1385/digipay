@@ -6,8 +6,11 @@ i18n.use(initReactI18next).init({
   resources: {
     fa: {
       translation: {
-        hello: "سلام دنیا",
-        welcome: "به سایت من خوش آمدی"
+        Loans_and_credits: "  وام و اعتبار ",
+       loan_purchase:"وام خرید کالا",
+       shop_pay_later:"الان بخر بعدا پرداخت کن",
+       Installment_purchase:"خرید اقساطی از دیجی‌کالا",
+       
       }
     },
     en: {
