@@ -1,0 +1,27 @@
+// i18n.js
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    fa: {
+      translation: {
+        hello: "سلام دنیا",
+        welcome: "به سایت من خوش آمدی"
+      }
+    },
+    en: {
+      translation: {
+        hello: "Hello World",
+        welcome: "Welcome to my website"
+      }
+    }
+  },
+  lng: "fa",
+  fallbackLng: "fa",
+  interpolation: {
+    escapeValue: false
+  }
+});
+
+export default i18n;
