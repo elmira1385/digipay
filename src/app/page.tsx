@@ -1,9 +1,10 @@
-import Image from "next/image";
+import Slider from "./UI/Slider";
+
 
 export default function Home() {
   return (
     <div className="">
-      
+      <Slider/>
     </div>
   );
 }
