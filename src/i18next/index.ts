@@ -10,7 +10,21 @@ i18n.use(initReactI18next).init({
        loan_purchase:"وام خرید کالا",
        shop_pay_later:"الان بخر بعدا پرداخت کن",
        Installment_purchase:"خرید اقساطی از دیجی‌کالا",
+       insurance: "بیمه",
+       third_insurance: "بیمه شخص ثالث",
+       electronic_insurance: "بیمه تجهیزات الکترونیک",
+       Capital_management: "مدیریت سرمایه",
+       business_services:"خدمات کسب و کارها",
+       credit_payment:"درگاه پرداخت اعتباری",
+       Loan_sellers:"   وام فروشندگان",
+       Comprehensive_payment:"   درگاه پرداخت جامع",
+       Early_settlement:" تسویه زودهنگام",
+       Organizational_services:"  خدمات سازمانی",
+       purchase_Digikala:" خرید اقساطی از دیجی‌کالا. ",
+       search:"جست‌وجو در خدمات، فروشگاه‌ها، محصولات"
        
+
+
       }
     },
     en: {

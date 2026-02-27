@@ -4,6 +4,7 @@ import "./globals.css";
 import Provider from "./Provider";
 import ReduxProvider from "./ReduxProvider";
 import Header from "./UI/Header";
+import Search from "./UI/Search";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <ReduxProvider>
         <Provider>
           <Header />
+          <Search />
         {children}
         </Provider>
         </ReduxProvider>
