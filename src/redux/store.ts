@@ -1,11 +1,15 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import { counterSlice } from './features/counterSlice'
+import { boxSlice } from './features/boxSlice'
+import { addToBasket } from './features/addToBasket'
 
 
 export const store = configureStore({
   reducer: {
-    counter:counterSlice.reducer
+    counter:counterSlice.reducer,
+    boxes:boxSlice.reducer,
+    cart:addToBasket.reducer
   },
 })
 
