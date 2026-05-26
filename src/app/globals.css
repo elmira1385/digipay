@@ -1,4 +1,3 @@
-
 @import "tailwindcss";
 
 @font-face {
@@ -46,16 +45,16 @@
 }
 :root {
   height: 100%;
- }
+}
 
 body {
-height: 100vh;
-font-family: IRANYekanX, sans-serif;
-direction: rtl;
-background-color: #f2f3f6;
- }
+  height: 100vh;
+  font-family: IRANYekanX, sans-serif;
+  direction: rtl;
+  background-color: #f2f3f6;
+}
 
- .swiper {
+.swiper {
   width: 100%;
   height: 100%;
 }
@@ -67,7 +66,6 @@ background-color: #f2f3f6;
   justify-content: center;
   align-items: center;
 }
-
 
 .ss01 {
   -moz-font-feature-settings: "ss01";
