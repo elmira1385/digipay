@@ -13,11 +13,21 @@ export interface IProduct {
 const initialState: IProduct = {
   products:[]
 }
+const getSavedCard=()=>{
+  if(typeof window !=="undefined"){
+    const data=localStorage.getItem("basket")
+    return data? JSON.parse(data) :[]
+  }
+  return []
+}
 
 export const addToBasket = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    hydrateCArd:(state,action:PayloadAction<any[]>)=>{
+     state.products=action.payload
+    },
     //add product
     setProduct: (state ,action:PayloadAction<TSlider>) => {
       const product=action.payload
@@ -27,6 +37,7 @@ export const addToBasket = createSlice({
       }else{
         state.products.push({...product,qty:1})
       }
+      localStorage.setItem("basket", JSON.stringify(state.products))
     },
     deleteOne: (state,action:PayloadAction<string>) => {
        const id=action.payload
@@ -37,9 +48,11 @@ export const addToBasket = createSlice({
        }else{
         state.products.filter((p)=>(p.id!==id))
        }
+       localStorage.setItem("basket", JSON.stringify(state.products))
     },
     clearAll: (state) => {
       state.products=[]
+      localStorage.removeItem("basket")
     },
     setQty: (state,action:PayloadAction<{id:string,qty:number}>) => {
       const {id,qty}=action.payload
@@ -47,11 +60,12 @@ export const addToBasket = createSlice({
       if(findItem){
         findItem.qty=qty
       }
+      localStorage.setItem("basket", JSON.stringify(state.products))
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setProduct,clearAll,deleteOne,setQty } = addToBasket.actions
+export const { setProduct,clearAll,deleteOne,setQty,hydrateCArd } = addToBasket.actions
 
 export default addToBasket.reducer

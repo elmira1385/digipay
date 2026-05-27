@@ -5,8 +5,14 @@ import axios from "@/api/axios";
 import MainTamplateForProducts, { TSlider } from "./MainTamplateForProducts";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { hydrateCArd } from "@/redux/features/addToBasket";
 
 const SaleSlider = () => {
+  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  useSelector((state: RootState) => state.cart.products);
   const { t } = useTranslation();
   const initialTime = 6 * 60 * 60;
   const [Time, setTime] = useState(initialTime);
@@ -21,6 +27,13 @@ const SaleSlider = () => {
     }, 1000);
     return () => clearInterval(Timer);
   }, []);
+
+  useEffect(() => {
+    const basket = localStorage.getItem("basket");
+    if (basket) {
+      dispatch(hydrateCArd(JSON.parse(basket)));
+    }
+  }, [dispatch]);
   const format = (num: number) => String(num).padStart(2, "0");
   const hours = format(Math.floor(Time / 3600));
   const minutes = format(Math.floor((Time % 3600) / 60));
@@ -28,7 +41,11 @@ const SaleSlider = () => {
   const { data } = useQuery({
     queryKey: ["Work"],
     queryFn: async () => {
-      const { data } = await axios.get("InneirApi/sliderForSale");
+      const { data } = await axios.get("InneirApi/sliderForSale", {
+        headers: {
+          Authorization: token,
+        },
+      });
       return data;
     },
   });

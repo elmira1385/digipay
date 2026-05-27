@@ -1,17 +1,24 @@
 "use client";
-import { setQty } from "@/redux/features/addToBasket";
+import { hydrateCArd, setQty } from "@/redux/features/addToBasket";
 import { RootState } from "@/redux/store";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 const BasketProduct = () => {
+  const token=localStorage.getItem("token")
   const product = useSelector((state: RootState) => state.cart.products);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  useEffect(()=>{
+    const basket=localStorage.getItem("basket")
+    if(basket){
+      dispatch(hydrateCArd(JSON.parse(basket)))
+    }
+  },[dispatch])
   return (
     <div className="flex flex-col justify-center items-center gap-2">
-      {product.map((item) => (
+      {token && product.map((item) => (
         <div className="flex justify-between items-center" key={item.id}>
           <img width={100} src={item.img} alt="" />
           <select

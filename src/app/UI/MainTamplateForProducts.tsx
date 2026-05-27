@@ -25,6 +25,7 @@ export interface IProps {
 }
 
 const MainTamplateForProducts = ({ Sliders }: IProps) => {
+  const token=localStorage.getItem("token")
   const { t } = useTranslation();
   const product = useSelector((state: RootState) => state.cart.products);
   const dispatch = useDispatch();
