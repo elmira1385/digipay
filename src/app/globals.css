@@ -1,48 +1,6 @@
 @import "tailwindcss";
+@import "../app//Fonts/Webfonts/fontiran.css";
 
-@font-face {
-  font-family: IRANYekanX;
-  font-style: normal;
-  font-weight: 300;
-  src:
-    url("/Fonts/Webfonts/woff/IRANYekanX-Light.woff") format("woff"),
-    url("/Fonts/Webfonts/woff2/IRANYekanX-Light.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: IRANYekanX;
-  font-style: normal;
-  font-weight: 900;
-  src:
-    url("/Fonts/Webfonts/woff/IRANYekanX-Black.woff") format("woff"),
-    url("/Fonts/Webfonts/woff2/IRANYekanX-Black.woff2") format("woff2");
-}
-@font-face {
-  font-family: IRANYekanX;
-  font-style: normal;
-  font-weight: 950;
-  src:
-    url("/Fonts/Webfonts/woff/IRANYekanX-ExtraBlack.woff") format("woff"),
-    url("/Fonts/Webfonts/woff2/IRANYekanX-ExtraBlack.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: IRANYekanX;
-  font-style: normal;
-  font-weight: bold;
-  src:
-    url("/Fonts/Webfonts/woff/IRANYekanX-Bold.woff") format("woff"),
-    url("/Fonts/Webfonts/woff2/IRANYekanX-Bold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: IRANYekanX;
-  font-style: normal;
-  font-weight: normal;
-  src:
-    url("/Fonts/Webfonts/woff/IRANYekanX-Regular.woff") format("woff"),
-    url("/Fonts/Webfonts/woff2/IRANYekanX-Regular.woff2") format("woff2");
-}
 :root {
   height: 100%;
 }

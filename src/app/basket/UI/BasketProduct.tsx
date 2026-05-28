@@ -1,5 +1,5 @@
 "use client";
-import { hydrateCArd, setQty } from "@/redux/features/addToBasket";
+import { clearAll, hydrateCArd, setQty } from "@/redux/features/addToBasket";
 import { RootState } from "@/redux/store";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";

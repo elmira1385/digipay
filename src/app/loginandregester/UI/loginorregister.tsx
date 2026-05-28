@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setIsLogin } from "@/redux/features/isLogin";
 interface userType {
   name?: string;
   email: string;
@@ -12,6 +15,8 @@ interface userType {
 }
 const Loginorregister = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const dispatch=useDispatch()
+  useSelector((state:RootState)=>state.login.isLogin)
   const route = useRouter();
   const { mutate: mutateRegister, isSuccess: isSuccessRegister } = useMutation({
     mutationFn: async (userRegister: userType) => {
@@ -64,7 +69,9 @@ const Loginorregister = () => {
   useEffect(() => {
     if (isSuccessLogin) {
       localStorage.setItem("token", dataLogin.token);
+      dispatch(setIsLogin(true))
       route.push("/");
+      
     } else if (localStorage.getItem("token") !== null) {
       route.push("/");
     }

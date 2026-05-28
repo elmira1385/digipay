@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-interface RootState {
-  boxes: IOpenState;
-}
+import { RootState } from "@/redux/store";
+
 const Header = () => {
   const { t } = useTranslation();
-  const route=useRouter()
+  const login = useSelector((state: RootState) => state.login.isLogin);
+  const route = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const token=localStorage.getItem("token")
   const allBoxStates = useSelector((state: RootState) => state.boxes);
   const dispatch = useDispatch();
   const handleBox1Click = () => {
@@ -248,12 +249,28 @@ const Header = () => {
           </section>
           <hr className="w-94 mx-2 text-gray-300" />
           <div className="flex items-start p-4">
-            <button onClick={()=>{
-              route.push("/loginandregester")
-              setSidebarOpen(false)
-            }} className="flex p-2 text-[16px] font-semibold bg-blue-500 text-white rounded-xl">
-              {t("loginOrregister")}
-            </button>
+            {login && token  ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 64 64"
+              >
+                <circle cx="32" cy="32" r="30" fill="#4F46E5" />
+                <circle cx="32" cy="24" r="10" fill="#fff" />
+                <path d="M14 50c0-10 8-18 18-18s18 8 18 18" fill="#fff" />
+              </svg>
+            ) : (
+              <button
+                onClick={() => {
+                  route.push("/loginandregester");
+                  setSidebarOpen(false);
+                }}
+                className="flex p-2 text-[16px] font-semibold bg-blue-500 text-white rounded-xl"
+              >
+                {t("loginOrregister")}
+              </button>
+            )}
           </div>
         </div>
       )}
