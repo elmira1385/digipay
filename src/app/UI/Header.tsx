@@ -3,17 +3,18 @@
 import { IOpenState, toggleBox } from "@/redux/features/boxSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { setIsLogin } from "@/redux/features/isLogin";
+import { clearAll } from "@/redux/features/addToBasket";
 
 const Header = () => {
   const { t } = useTranslation();
   const login = useSelector((state: RootState) => state.login.isLogin);
   const route = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const token=localStorage.getItem("token")
   const allBoxStates = useSelector((state: RootState) => state.boxes);
   const dispatch = useDispatch();
   const handleBox1Click = () => {
@@ -249,17 +250,32 @@ const Header = () => {
           </section>
           <hr className="w-94 mx-2 text-gray-300" />
           <div className="flex items-start p-4">
-            {login && token  ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 64 64"
-              >
-                <circle cx="32" cy="32" r="30" fill="#4F46E5" />
-                <circle cx="32" cy="24" r="10" fill="#fff" />
-                <path d="M14 50c0-10 8-18 18-18s18 8 18 18" fill="#fff" />
-              </svg>
+            {login ? (
+              <div className="flex justify-center items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 64 64"
+                >
+                  <circle cx="32" cy="32" r="30" fill="#4F46E5" />
+                  <circle cx="32" cy="24" r="10" fill="#fff" />
+                  <path d="M14 50c0-10 8-18 18-18s18 8 18 18" fill="#fff" />
+                </svg>
+                <button
+                  onClick={() => {
+                    dispatch(setIsLogin(false))
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("basket");
+                     dispatch(clearAll());
+                    route.push("/loginandregester");
+                    setSidebarOpen(false);
+                  }}
+                  className="bg-blue-500 p-2 rounded-md"
+                >
+                  logout
+                </button>
+              </div>
             ) : (
               <button
                 onClick={() => {

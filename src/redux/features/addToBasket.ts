@@ -10,9 +10,7 @@ export interface IProduct {
   products: TCartProduct[]
 }
 
-const initialState: IProduct = {
-  products:[]
-}
+
 const getSavedCard=()=>{
   if(typeof window !=="undefined"){
     const data=localStorage.getItem("basket")
@@ -21,12 +19,15 @@ const getSavedCard=()=>{
   return []
 }
 
+const initialState: IProduct = {
+  products:[]
+}
 export const addToBasket = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    hydrateCArd:(state,action:PayloadAction<any[]>)=>{
-     state.products=action.payload
+    hydrateCArd:(state)=>{
+     state.products=getSavedCard()
     },
     //add product
     setProduct: (state ,action:PayloadAction<TSlider>) => {

@@ -6,6 +6,7 @@ import Provider from "./Provider";
 import ReduxProvider from "./ReduxProvider";
 import Header from "./UI/Header";
 import Menu from "./UI/Menu";
+import CardHydrator from "./UI/CardHydrator";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +33,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ss01  antialiased`}
       >
         <ReduxProvider>
+          <CardHydrator/>
           <Provider>
             <Header />
 
             {children}
-            {/* <Menu /> */}
+           
           </Provider>
         </ReduxProvider>
       </body>

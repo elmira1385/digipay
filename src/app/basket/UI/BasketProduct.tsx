@@ -1,5 +1,5 @@
 "use client";
-import { clearAll, hydrateCArd, setQty } from "@/redux/features/addToBasket";
+import { clearAll, setQty } from "@/redux/features/addToBasket";
 import { RootState } from "@/redux/store";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,12 +10,7 @@ const BasketProduct = () => {
   const product = useSelector((state: RootState) => state.cart.products);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  useEffect(()=>{
-    const basket=localStorage.getItem("basket")
-    if(basket){
-      dispatch(hydrateCArd(JSON.parse(basket)))
-    }
-  },[dispatch])
+ 
   return (
     <div className="flex flex-col justify-center items-center gap-2">
       {token && product.map((item) => (

@@ -136,7 +136,7 @@ const Loginorregister = () => {
       ) : (
         <div className="flex flex-col p-6 shadow-lg shadow-black/10 rounded-2xl justify-center items-center gap-4">
           <p className="text-2xl">
-            {t("loginOrRegister.register")}{" "}
+            {t("loginOrRegister.register")}
             <span className="text-blue-600">{t("loginOrRegister.user")}</span>
           </p>
           <form

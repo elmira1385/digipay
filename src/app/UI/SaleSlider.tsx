@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { clearAll, hydrateCArd } from "@/redux/features/addToBasket";
+
 
 const SaleSlider = () => {
   const token = localStorage.getItem("token");
@@ -28,12 +28,6 @@ const SaleSlider = () => {
     return () => clearInterval(Timer);
   }, []);
 
-  useEffect(() => {
-    const basket = localStorage.getItem("basket");
-    if (basket) {
-      dispatch(hydrateCArd(JSON.parse(basket)));
-    }
-  }, [dispatch]);
   const format = (num: number) => String(num).padStart(2, "0");
   const hours = format(Math.floor(Time / 3600));
   const minutes = format(Math.floor((Time % 3600) / 60));
