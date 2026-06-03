@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { deleteOne, setProduct } from "@/redux/features/addToBasket";
+import { toast, ToastContainer } from "react-toastify";
 
 export type TSlider = {
   id: string;
@@ -25,7 +26,7 @@ export interface IProps {
 }
 
 const MainTamplateForProducts = ({ Sliders }: IProps) => {
-  const token=localStorage.getItem("token")
+  const token = () => localStorage.getItem("token");
   const { t } = useTranslation();
   const product = useSelector((state: RootState) => state.cart.products);
   const dispatch = useDispatch();
@@ -103,11 +104,25 @@ const MainTamplateForProducts = ({ Sliders }: IProps) => {
                 {qty === 0 ? (
                   <button
                     onClick={() => {
-                      dispatch(setProduct(item));
+                      if (token()) {
+                        dispatch(setProduct(item));
+                      } else {
+                        toast.info(`${t("pleaseLoginFirst")}`, {
+                          position: "top-left",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: false,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "colored",
+                        
+                        });
+                      }
                     }}
                     className="p-2 text-[12px] font-semibold text-white bg-blue-500 rounded-xl "
                   >
-                {t("addToBasket")}
+                    {t("addToBasket")}
                   </button>
                 ) : (
                   <div className="flex justify-between items-center p-2 text-[12px] font-bold text-white bg-blue-500 rounded-xl ">

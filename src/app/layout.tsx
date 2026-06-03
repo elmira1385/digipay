@@ -7,6 +7,7 @@ import ReduxProvider from "./ReduxProvider";
 import Header from "./UI/Header";
 import Menu from "./UI/Menu";
 import CardHydrator from "./UI/CardHydrator";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +39,7 @@ export default function RootLayout({
             <Header />
 
             {children}
-           
+            <ToastContainer />
           </Provider>
         </ReduxProvider>
       </body>

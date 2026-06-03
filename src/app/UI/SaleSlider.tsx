@@ -8,11 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
-
 const SaleSlider = () => {
-  const token = localStorage.getItem("token");
-  const dispatch = useDispatch();
-  useSelector((state: RootState) => state.cart.products);
   const { t } = useTranslation();
   const initialTime = 6 * 60 * 60;
   const [Time, setTime] = useState(initialTime);
@@ -35,11 +31,7 @@ const SaleSlider = () => {
   const { data } = useQuery({
     queryKey: ["Work"],
     queryFn: async () => {
-      const { data } = await axios.get("InneirApi/sliderForSale", {
-        headers: {
-          Authorization: token,
-        },
-      });
+      const { data } = await axios.get("InneirApi/sliderForSale");
       return data;
     },
   });

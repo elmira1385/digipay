@@ -32,6 +32,7 @@ i18n.use(initReactI18next).init({
         ghest: "قسط",
         addToBasket: "افزودن به سبد خرید",
         loginOrregister: "ورود / ثبت نام",
+        pleaseLoginFirst:"لطفا برای خرید ثبت نام یا ورود کنید",
         sale: {
           ghestpayment1: "5,722,860",
           brand1: "تیمچه گلد",

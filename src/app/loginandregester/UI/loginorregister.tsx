@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { setIsLogin } from "@/redux/features/isLogin";
+import { toast } from "react-toastify";
 interface userType {
   name?: string;
   email: string;
@@ -15,8 +16,8 @@ interface userType {
 }
 const Loginorregister = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const dispatch=useDispatch()
-  useSelector((state:RootState)=>state.login.isLogin)
+  const dispatch = useDispatch();
+  useSelector((state: RootState) => state.login.isLogin);
   const route = useRouter();
   const { mutate: mutateRegister, isSuccess: isSuccessRegister } = useMutation({
     mutationFn: async (userRegister: userType) => {
@@ -29,11 +30,11 @@ const Loginorregister = () => {
     },
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isSuccessRegister) {
-    setIsLoginOpen(true);
-  }
-  },[isSuccessRegister])
+      setIsLoginOpen(true);
+    }
+  }, [isSuccessRegister]);
   const {
     register,
     handleSubmit,
@@ -50,6 +51,7 @@ const Loginorregister = () => {
     mutate: mutateLogin,
     data: dataLogin,
     isSuccess: isSuccessLogin,
+    isPending: isPendingLogin,
   } = useMutation({
     mutationFn: async (userLogin: userType) => {
       const { data } = await axios.post("/api/users/login", {
@@ -69,9 +71,18 @@ const Loginorregister = () => {
   useEffect(() => {
     if (isSuccessLogin) {
       localStorage.setItem("token", dataLogin.token);
-      dispatch(setIsLogin(true))
+      dispatch(setIsLogin(true));
       route.push("/");
-      
+      toast.success("you are logined", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     } else if (localStorage.getItem("token") !== null) {
       route.push("/");
     }
@@ -129,7 +140,7 @@ const Loginorregister = () => {
               type="submit"
               className="bg-blue-600 rounded-2xl text-white text-lg "
             >
-              {t("loginOrRegister.submit")}
+              {isPendingLogin ? "loading..." : t("loginOrRegister.submit")}
             </button>
           </form>
         </div>
