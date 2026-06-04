@@ -33,6 +33,16 @@ const Loginorregister = () => {
   useEffect(() => {
     if (isSuccessRegister) {
       setIsLoginOpen(true);
+      toast.success("you are rejestered please login", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }, [isSuccessRegister]);
   const {
@@ -93,7 +103,7 @@ const Loginorregister = () => {
       {isLoginOpen ? (
         <div className="flex flex-col  p-10 shadow-lg shadow-black/10 rounded-2xl justify-center items-center gap-4">
           <p className="text-2xl">
-            {t("loginOrRegister.login")}{" "}
+            {t("loginOrRegister.login")}
             <span className="text-blue-600">{t("loginOrRegister.user")}</span>
           </p>
           <form
@@ -138,9 +148,9 @@ const Loginorregister = () => {
             </p>
             <button
               type="submit"
-              className="bg-blue-600 rounded-2xl text-white text-lg "
+              className="bg-blue-600 rounded-2xl text-white text-lg flex items-center justify-center"
             >
-              {isPendingLogin ? "loading..." : t("loginOrRegister.submit")}
+              {isPendingLogin ? <div className="loader"></div> : t("loginOrRegister.submit")}
             </button>
           </form>
         </div>

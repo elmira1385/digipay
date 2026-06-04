@@ -59,8 +59,8 @@ const MainTamplateForProducts = ({ Sliders }: IProps) => {
                 />
 
                 <div className="flex justify-between mx-1 items-center rounded-full absolute bottom-0 left-0 right-0 p-1 bg-gray-200/50">
-                  <div className="flex flex-col rounded-full px-1.5 py-0.5 bg-blue-500 text-sm text-white justify-center items-center">
-                    <span className="font-bold  h-2.5">4</span>
+                  <div className="flex flex-col rounded-full p-1 bg-blue-500 text-sm text-white justify-center items-center">
+                    <span className="font-bold  h-2.5 ">4</span>
                     <span>{t(`${item.ghest}`)}</span>
                   </div>
                   <div className="flex gap-1 text-sm justify-center items-center">
@@ -72,12 +72,12 @@ const MainTamplateForProducts = ({ Sliders }: IProps) => {
                 </div>
               </div>
             </Link>
-            <div className="flex flex-col justify-between gap-2 p-2">
+            <div className="flex flex-col justify-between gap-2 p-2 h-50">
               <div className="flex flex-col  items-start ">
-                <span className="text-sm text-gray-500">
+                <span className="text-[0.75rem] text-gray-500">
                   {t(`${item.brand}`)}
                 </span>
-                <span className="text-start  text-[16px]">
+                <span className="text-start  text-[1rem]">
                   {t(`${item.information}`)}
                 </span>
               </div>
