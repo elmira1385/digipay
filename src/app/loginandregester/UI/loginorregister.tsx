@@ -19,7 +19,7 @@ const Loginorregister = () => {
   const dispatch = useDispatch();
   useSelector((state: RootState) => state.login.isLogin);
   const route = useRouter();
-  const { mutate: mutateRegister, isSuccess: isSuccessRegister } = useMutation({
+  const { mutate: mutateRegister, isSuccess: isSuccessRegister,isPending: isPendingRegister } = useMutation({
     mutationFn: async (userRegister: userType) => {
       const { data } = await axios.post("/api/users/register", {
         name: userRegister.name,
@@ -150,7 +150,11 @@ const Loginorregister = () => {
               type="submit"
               className="bg-blue-600 rounded-2xl text-white text-lg flex items-center justify-center"
             >
-              {isPendingLogin ? <div className="loader"></div> : t("loginOrRegister.submit")}
+              {isPendingLogin ? (
+                <div className="loader"></div>
+              ) : (
+                t("loginOrRegister.submit")
+              )}
             </button>
           </form>
         </div>
@@ -201,7 +205,7 @@ const Loginorregister = () => {
               />
             </div>
             <p className="text-sm">
-              {t("loginOrRegister.alreadyHaveAccount")}{" "}
+              {t("loginOrRegister.alreadyHaveAccount")}
               <span
                 onClick={() => {
                   setIsLoginOpen(true);
@@ -213,9 +217,13 @@ const Loginorregister = () => {
             </p>
             <button
               type="submit"
-              className="bg-blue-600 rounded-2xl text-white text-lg "
+              className="bg-blue-600 rounded-2xl text-white text-lg  flex justify-center items-center"
             >
-              {t("loginOrRegister.createAccount")}
+              {isPendingRegister ? (
+                <div className="loader"></div>
+              ) : (
+                t("loginOrRegister.createAccount")
+              )}
             </button>
           </form>
         </div>

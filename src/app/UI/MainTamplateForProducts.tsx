@@ -1,13 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { deleteOne, setProduct } from "@/redux/features/addToBasket";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export type TSlider = {
   id: string;
@@ -125,16 +123,16 @@ const MainTamplateForProducts = ({ Sliders }: IProps) => {
                     {t("addToBasket")}
                   </button>
                 ) : (
-                  <div className="flex justify-between items-center p-2 text-[12px] font-bold text-white bg-blue-500 rounded-xl ">
-                    <p
+                  <div className="flex justify-between  px-4 py-2 text-[12px] font-bold text-white bg-blue-500 rounded-xl ">
+                    <p className="px-1"
                       onClick={() => {
                         dispatch(setProduct(item));
                       }}
                     >
                       +
                     </p>
-                    <p>{qty}</p>
-                    <p
+                    <p className="px-1">{qty}</p>
+                    <p className="px-1"
                       onClick={() => {
                         dispatch(deleteOne(item.id));
                       }}
