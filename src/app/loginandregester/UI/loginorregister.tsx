@@ -19,7 +19,11 @@ const Loginorregister = () => {
   const dispatch = useDispatch();
   useSelector((state: RootState) => state.login.isLogin);
   const route = useRouter();
-  const { mutate: mutateRegister, isSuccess: isSuccessRegister,isPending: isPendingRegister } = useMutation({
+  const {
+    mutate: mutateRegister,
+    isSuccess: isSuccessRegister,
+    isPending: isPendingRegister,
+  } = useMutation({
     mutationFn: async (userRegister: userType) => {
       const { data } = await axios.post("/api/users/register", {
         name: userRegister.name,
@@ -48,7 +52,7 @@ const Loginorregister = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors:errorRegister },
   } = useForm({
     defaultValues: {
       name: "",
@@ -72,7 +76,11 @@ const Loginorregister = () => {
     },
   });
 
-  const { register: registerLogin, handleSubmit: handelSubmitLogin } = useForm({
+  const {
+    register: registerLogin,
+    handleSubmit: handelSubmitLogin,
+    formState: { errors: errorLogin },
+  } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -113,16 +121,25 @@ const Loginorregister = () => {
             className="flex flex-col gap-4"
             action=""
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 relative">
               <label className="text-lg">{t("loginOrRegister.email")}</label>
               <input
                 {...registerLogin("email", {
                   required: true,
+                  pattern: {
+                    value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                    message: "Please enter a valid email address",
+                  },
                 })}
                 className="outline-none border border-gray-300 p-2 rounded-2xl"
                 placeholder={t("loginOrRegister.typeHere")}
                 type="email"
               />
+              {errorLogin.email && (
+                <div className=" rounded bg-red-500 px-2 py-1 text-xs text-white">
+                  {errorLogin.email.message}
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-lg">{t("loginOrRegister.password")}</label>
@@ -136,7 +153,7 @@ const Loginorregister = () => {
               />
             </div>
             <p className="text-sm">
-              {t("loginOrRegister.createANewAccount")}{" "}
+              {t("loginOrRegister.createANewAccount")}
               <span
                 onClick={() => {
                   setIsLoginOpen(false);
@@ -187,11 +204,20 @@ const Loginorregister = () => {
               <input
                 {...register("email", {
                   required: true,
+                   pattern: {
+                    value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                    message: "Please enter a valid email address",
+                  },
                 })}
                 className="outline-none border border-gray-300 p-2 rounded-2xl"
                 placeholder={t("loginOrRegister.typeHere")}
                 type="email"
               />
+               {errorRegister.email && (
+                <div className=" rounded bg-red-500 px-2 py-1 text-xs text-white">
+                  {errorRegister.email.message}
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-lg">{t("loginOrRegister.password")}</label>
