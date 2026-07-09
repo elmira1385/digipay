@@ -33,6 +33,9 @@ i18n.use(initReactI18next).init({
         addToBasket: "افزودن به سبد خرید",
         loginOrregister: "ورود / ثبت نام",
         pleaseLoginFirst:"لطفا برای خرید ثبت نام یا ورود کنید",
+        youAreRejesteredPleaseLogin:"ثبت نام موفقیت امیز بود لطفا ورود کنید",
+        youarelogined:"ورود شما موفقیت امیز بود",
+        pleaseRefineYourInformation:"لطفا اطلاعاتتون را درست وارد کنید",
         sale: {
           ghestpayment1: "5,722,860",
           brand1: "تیمچه گلد",

@@ -15,6 +15,7 @@ interface userType {
   password: string;
 }
 const Loginorregister = () => {
+  const { t } = useTranslation();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const dispatch = useDispatch();
   useSelector((state: RootState) => state.login.isLogin);
@@ -37,7 +38,7 @@ const Loginorregister = () => {
   useEffect(() => {
     if (isSuccessRegister) {
       setIsLoginOpen(true);
-      toast.success("you are rejestered please login", {
+      toast.success(`${t("youAreRejesteredPleaseLogin")}`, {
         position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -65,6 +66,7 @@ const Loginorregister = () => {
     mutate: mutateLogin,
     data: dataLogin,
     isSuccess: isSuccessLogin,
+    isError:isErrorLogin,
     isPending: isPendingLogin,
   } = useMutation({
     mutationFn: async (userLogin: userType) => {
@@ -91,7 +93,7 @@ const Loginorregister = () => {
       localStorage.setItem("token", dataLogin.token);
       dispatch(setIsLogin(true));
       route.push("/");
-      toast.success("you are logined", {
+      toast.success(`${t("youarelogined")}`, {
         position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -103,9 +105,20 @@ const Loginorregister = () => {
       });
     } else if (localStorage.getItem("token") !== null) {
       route.push("/");
+    }else if(isErrorLogin){
+      toast.error(`${t("pleaseRefineYourInformation")}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
-  }, [isSuccessLogin]);
-  const { t } = useTranslation();
+  }, [isSuccessLogin,isErrorLogin]);
+
   return (
     <div className="flex justify-center items-center fixed top-1/2 left-1/2 -translate-1/2">
       {isLoginOpen ? (
@@ -178,8 +191,8 @@ const Loginorregister = () => {
       ) : (
         <div className="flex flex-col p-6 shadow-lg shadow-black/10 rounded-2xl justify-center items-center gap-4">
           <p className="text-2xl">
-            {t("loginOrRegister.register")}
-            <span className="text-blue-600">{t("loginOrRegister.user")}</span>
+            {t("loginOrRegister.register")} 
+            <span className="text-blue-600"> {t("loginOrRegister.user")}</span>
           </p>
           <form
             onSubmit={handleSubmit(({ name, email, password }) => {

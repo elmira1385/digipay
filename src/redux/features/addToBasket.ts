@@ -1,7 +1,7 @@
 import { TSlider } from "@/app/UI/MainTamplateForProducts";
 import { createSlice } from "@reduxjs/toolkit";
 import type { Action, PayloadAction } from "@reduxjs/toolkit";
-type TCartProduct = TSlider & {
+export type TCartProduct = TSlider & {
   qty: number;
 };
 
@@ -43,7 +43,6 @@ export const addToBasket = createSlice({
       const exist = state.products.find((p) => p.id === id);
       if (!exist) return;
       exist.qty--;
-
       if (exist.qty <= 0) {
         state.products = state.products.filter((p) => p.id !== id);
       }
