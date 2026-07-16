@@ -12,6 +12,7 @@ export default function Home() {
       <Services />
       <Banner />
       <SaleSlider/>
+      <Menu/>
     </div>
   );
 }
